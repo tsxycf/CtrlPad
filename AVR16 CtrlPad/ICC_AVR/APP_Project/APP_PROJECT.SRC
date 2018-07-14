@@ -1,0 +1,6 @@
+[Files]
+..\..\App\main.c
+[Headers]
+[Documents]
+[DEV]
+..\..\Dev\Scr\fifo.c
