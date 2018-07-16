@@ -10,26 +10,26 @@
 #include <iom64v.h>
 
 
-static uint8_t ticks;       //ÔÚÓ²¼şÎŞ·¨Íê³É³¤Ê±¼ä¼ÆÊ±Ê±£¬×÷ÎªÈí¼ş·ÖÆµÆ÷Ê¹ÓÃ
+static uint8_t ticks;       //åœ¨ç¡¬ä»¶æ— æ³•å®Œæˆé•¿æ—¶é—´è®¡æ—¶æ—¶ï¼Œä½œä¸ºè½¯ä»¶åˆ†é¢‘å™¨ä½¿ç”¨
 
-uint16_t Timer1ticks, Timer2ticks, Timer3ticks, Timer4ticks;       //¶¨Ê±Æ÷¼ÆÊı
+uint16_t Timer1ticks, Timer2ticks, Timer3ticks, Timer4ticks;       //å®šæ—¶å™¨è®¡æ•°
 
 /*********************************************************************************************************
 ** Function name: Timer_Init
-** Descriptions:  ³õÊ¼»¯¶¨Ê±Æ÷Timer
-** input parameters:timeport: ¶¨Ê±Æ÷ºÅ
-** input parameters:time_ms: ¶¨Ê±Ê±¼ä£¬µ¥Î»ms
+** Descriptions:  åˆå§‹åŒ–å®šæ—¶å™¨Timer
+** input parameters:timeport: å®šæ—¶å™¨å·
+** input parameters:time_ms: å®šæ—¶æ—¶é—´ï¼Œå•ä½ms
 ** input parameters:
 ** output parameters:
 ** Returned value:
-** ±¸×¢£º¾§ÕñÆµÂÊÎª7.3728Mhz,(0.1356us)
+** å¤‡æ³¨ï¼šæ™¶æŒ¯é¢‘ç‡ä¸º7.3728Mhz,(0.1356us)
 *********************************************************************************************************/
 void Timer_Init( uint8_t timeport, uint16_t time_ms)
 {
     uint8_t tmp;
     if( TIMER0 == timeport )
     {
-        TCCR0 = (1<<CS02) | (1<<CS01) | (1<<CS00) ; //·ÖÆµÅäÖÃ1024·Ö    7.2khz
+        TCCR0 = (1<<CS02) | (1<<CS01) | (1<<CS00) ; //åˆ†é¢‘é…ç½®1024åˆ†    7.2khz
         tmp = (uint8_t)(7.2 * time_ms);
         tmp = 0xff - tmp;
         TCNT0 =  tmp;
@@ -49,17 +49,33 @@ void Timer_Init( uint8_t timeport, uint16_t time_ms)
 }
 
 
-
-
 /*********************************************************************************************************
-** Function name: Timer1
-** Descriptions:  ¶¨Ê±Æ÷ÖĞ¶Ïº¯Êı
+** Function name: Timer0
+** Descriptions:  å®šæ—¶å™¨ä¸­æ–­å‡½æ•°
 ** input parameters:
 ** input parameters:
 ** input parameters:
 ** output parameters:
 ** Returned value:
-** ±¸×¢£º
+** å¤‡æ³¨ï¼š
+*********************************************************************************************************/
+#pragma interrupt_handler timer0_ovf_isr:iv_TIM0_OVF
+void timer0_ovf_isr(void)
+{
+    Timer0ticks ++;
+    Timer0Callback();
+}
+
+
+/*********************************************************************************************************
+** Function name: Timer1
+** Descriptions:  å®šæ—¶å™¨ä¸­æ–­å‡½æ•°
+** input parameters:
+** input parameters:
+** input parameters:
+** output parameters:
+** Returned value:
+** å¤‡æ³¨ï¼š
 *********************************************************************************************************/
 #pragma interrupt_handler timer1_ovf_isr:iv_TIM1_OVF
 void timer1_ovf_isr(void)
@@ -70,13 +86,13 @@ void timer1_ovf_isr(void)
 
 /*********************************************************************************************************
 ** Function name: Timer2
-** Descriptions:  ¶¨Ê±Æ÷ÖĞ¶Ïº¯Êı
+** Descriptions:  å®šæ—¶å™¨ä¸­æ–­å‡½æ•°
 ** input parameters:
 ** input parameters:
 ** input parameters:
 ** output parameters:
 ** Returned value:
-** ±¸×¢£º
+** å¤‡æ³¨ï¼š
 *********************************************************************************************************/
 #pragma interrupt_handler timer2_ovf_isr:iv_TIM2_OVF
 void timer2_ovf_isr(void)
@@ -87,13 +103,13 @@ void timer2_ovf_isr(void)
 
 /*********************************************************************************************************
 ** Function name: Timer3
-** Descriptions:  ¶¨Ê±Æ÷ÖĞ¶Ïº¯Êı
+** Descriptions:  å®šæ—¶å™¨ä¸­æ–­å‡½æ•°
 ** input parameters:
 ** input parameters:
 ** input parameters:
 ** output parameters:
 ** Returned value:
-** ±¸×¢£º
+** å¤‡æ³¨ï¼š
 *********************************************************************************************************/
 #pragma interrupt_handler timer3_ovf_isr:iv_TIM3_OVF
 void timer3_ovf_isr(void)
@@ -108,11 +124,11 @@ void timer3_ovf_isr(void)
 
 /*********************************************************************************************************
 ** Function name: ClearTimerFlag
-** Descriptions:ÓÃÓÚÇå³ıticks±äÁ¿µÄº¯Êı
+** Descriptions:ç”¨äºæ¸…é™¤tickså˜é‡çš„å‡½æ•°
 ** input parameters: void
-** output parameters: ÎŞ
+** output parameters: æ— 
 ** Returned value:   0
-** ±¸×¢£º
+** å¤‡æ³¨ï¼š
 *********************************************************************************************************/
 static void ClearTimerTicks( uint8_t tmp )
 {
@@ -138,9 +154,9 @@ static void ClearTimerTicks( uint8_t tmp )
 ** Function name: Timer1Callback
 ** Descriptions:
 ** input parameters: void
-** output parameters: ÎŞ
+** output parameters: æ— 
 ** Returned value:   0
-** ±¸×¢£º
+** å¤‡æ³¨ï¼š
 *********************************************************************************************************/
 void Timer1Callback()
 {
@@ -153,9 +169,9 @@ void Timer1Callback()
 ** Function name: Timer2Callback
 ** Descriptions:
 ** input parameters: void
-** output parameters: ÎŞ
+** output parameters: æ— 
 ** Returned value:   0
-** ±¸×¢£º
+** å¤‡æ³¨ï¼š
 *********************************************************************************************************/
 void Timer2Callback()
 {
@@ -167,9 +183,9 @@ void Timer2Callback()
 ** Function name: Timer3Callback
 ** Descriptions:
 ** input parameters: void
-** output parameters: ÎŞ
+** output parameters: æ— 
 ** Returned value:   0
-** ±¸×¢£º
+** å¤‡æ³¨ï¼š
 *********************************************************************************************************/
 void Timer3Callback()
 {
@@ -181,9 +197,9 @@ void Timer3Callback()
 ** Function name: Timer4Callback
 ** Descriptions:
 ** input parameters: void
-** output parameters: ÎŞ
+** output parameters: æ— 
 ** Returned value:   0
-** ±¸×¢£º
+** å¤‡æ³¨ï¼š
 *********************************************************************************************************/
 void Timer4Callback()
 {

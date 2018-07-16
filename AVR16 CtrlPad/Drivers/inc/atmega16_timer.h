@@ -16,4 +16,6 @@
 #define TIMER2  0x02
 #define TIMER3  0x03
 
+extern uint16_t Timer1ticks, Timer2ticks, Timer3ticks, Timer4ticks;       //定时器计数
+
 #endif

@@ -2,7 +2,7 @@
  * Revision: V1.0
  * Date: 2018-6-13
  * Author: cff
- *Describe: clkÆµÂÊÎª7.3728ÏÂÅäÖÃ
+ *Describe: clké¢‘ç‡ä¸º7.3728ä¸‹é…ç½®
  */
 
 #include "atmega64_pwm.h"
@@ -11,8 +11,8 @@
 
 /*********************************************************************************************************
 ** Function name:  InitPwm()
-** Descriptions:   ³õÊ¼»¯PWMµÄ²ÎÊı
-** input parameters:   frequency:pwmµÄÊä³öÆµÂÊ
+** Descriptions:   åˆå§‹åŒ–PWMçš„å‚æ•°
+** input parameters:   frequency:pwmçš„è¾“å‡ºé¢‘ç‡
 ** input parameters:
 ** input parameters:
 ** output parameters:
@@ -27,8 +27,8 @@ void InitPwm( uint8_t frequency )
 
 /*********************************************************************************************************
 ** Function name:  setDuty()
-** Descriptions:   ÉèÖÃPWMÊä³öµÄÕ¼¿Õ±È
-** input parameters:   duty:È¡ÖµÎª0~100µÄÊı,´ú±í°Ù·Ö±È
+** Descriptions:   è®¾ç½®PWMè¾“å‡ºçš„å ç©ºæ¯”
+** input parameters:   duty:å–å€¼ä¸º0~100çš„æ•°,ä»£è¡¨ç™¾åˆ†æ¯”
 ** input parameters:
 ** input parameters:
 ** output parameters:

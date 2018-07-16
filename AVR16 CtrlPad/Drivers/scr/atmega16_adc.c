@@ -15,39 +15,39 @@
 
 
 /*********************************************************************************************************
-** Descriptions:  È«¾Ö±äÁ¿¶¨Òå
+** Descriptions:  å…¨å±€å˜é‡å®šä¹‰
 ** input parameters:
 *********************************************************************************************************/
-AdcDef hadc;            //´´½¨ADC×éÊµÌå
-uint8_t currentChannel;         //µ±Ç°Í¨µÀ
-uint8_t channelNum[8] = {0};    //Í¨µÀ±àºÅ
-uint8_t channelCount = 0;       //Í¨µÀ×ÜÊı
-uint8_t invalidFlag = 0;        //ÖĞ¶ÏÊÇ·ñÓĞĞ§±êÖ¾
+AdcDef hadc;            //åˆ›å»ºADCç»„å®ä½“
+uint8_t currentChannel;         //å½“å‰é€šé“
+uint8_t channelNum[8] = {0};    //é€šé“ç¼–å·
+uint8_t channelCount = 0;       //é€šé“æ€»æ•°
+uint8_t invalidFlag = 0;        //ä¸­æ–­æ˜¯å¦æœ‰æ•ˆæ ‡å¿—
 
 /*********************************************************************************************************
 ** Function name: ADC_Init
-** Descriptions:  ³õÊ¼»¯ADC
+** Descriptions:  åˆå§‹åŒ–ADC
 ** input parameters:
 ** input parameters:
 ** input parameters:
 ** output parameters:
 ** Returned value:
-** ±¸×¢£º
+** å¤‡æ³¨ï¼š
 *********************************************************************************************************/
 void ADC_Init( )
 {
-    ADMUX |= (1<<ADLAR);	// ½á¹û×ó¶ÔÆë
+    ADMUX |= (1<<ADLAR);	// ç»“æœå·¦å¯¹é½
 
 }
 
 
 /*********************************************************************************************************
 ** Function name: ADC_StartCon()
-** Descriptions:  Æô¶¯ADC×ª»»
+** Descriptions:  å¯åŠ¨ADCè½¬æ¢
 ** input parameters:
 ** output parameters:
 ** Returned value:
-** ±¸×¢£º
+** å¤‡æ³¨ï¼š
 *********************************************************************************************************/
 static void ADC_StartCon( void )
 {
@@ -60,31 +60,31 @@ static void ADC_StartCon( void )
 
 /*********************************************************************************************************
 ** Function name: ADC_MulCon()
-** Descriptions:  Æô¶¯ADC½øĞĞ¶àÂ·×ª»»
-** input parameters:channel´ú±í×ª»»µÄÂ·Êı  BIT(CHx) | BIT(CHy)...
+** Descriptions:  å¯åŠ¨ADCè¿›è¡Œå¤šè·¯è½¬æ¢
+** input parameters:channelä»£è¡¨è½¬æ¢çš„è·¯æ•°  BIT(CHx) | BIT(CHy)...
 ** input parameters:
 ** input parameters:
 ** output parameters:
 ** Returned value:
-** ±¸×¢£ºĞèÒªÕûÀí³öÁ½¸ö²ÎÊı£ºĞèÒª×ª»»»¯µÄÍ¨µÀ×ÜÊı£¬¸÷¸öÍ¨µÀµÄË÷Òı£¬
+** å¤‡æ³¨ï¼šéœ€è¦æ•´ç†å‡ºä¸¤ä¸ªå‚æ•°ï¼šéœ€è¦è½¬æ¢åŒ–çš„é€šé“æ€»æ•°ï¼Œå„ä¸ªé€šé“çš„ç´¢å¼•ï¼Œ
 *********************************************************************************************************/
 void ADC_MulConv( uint8_t channel )
 {
-    hadc.newDataFlag = 0x00;        //Çå¿ÕĞÂÊı¾İ±êÖ¾
-    if( hadc.endFlag == 0 ) //ËµÃ÷ÉÏ´Î×ª»»Î´Íê³É
+    hadc.newDataFlag = 0x00;        //æ¸…ç©ºæ–°æ•°æ®æ ‡å¿—
+    if( hadc.endFlag == 0 ) //è¯´æ˜ä¸Šæ¬¡è½¬æ¢æœªå®Œæˆ
     {
-        invalidFlag = 1;    //±ê¼Ç×î½üµÄÒ»´ÎÖĞ¶ÏÎŞĞ§
+        invalidFlag = 1;    //æ ‡è®°æœ€è¿‘çš„ä¸€æ¬¡ä¸­æ–­æ— æ•ˆ
     }
     else
     {
-        invalidFlag = 0;    //ÊÍ·ÅÎªÓĞĞ§
+        invalidFlag = 0;    //é‡Šæ”¾ä¸ºæœ‰æ•ˆ
     }
-    ADC_secretary( channel );       //½âÎöÍ¨µÀ
+    ADC_secretary( channel );       //è§£æé€šé“
     if( channelCount > 0 )
     {
         currentChannel = channelNum[0];
-        ADMUX |= currentChannel;     //¸³ÖµAD×ª»»Í¨µÀºÅ
-        ADC_StartCon();              //Æô¶¯×ª»»
+        ADMUX |= currentChannel;     //èµ‹å€¼ADè½¬æ¢é€šé“å·
+        ADC_StartCon();              //å¯åŠ¨è½¬æ¢
     }
 }
 
@@ -93,18 +93,18 @@ void ADC_MulConv( uint8_t channel )
 
 /*********************************************************************************************************
 ** Function name: ADC_secretary()
-** Descriptions:  ½«ADCµÄÍ¨µÀ²ÎÊı½øĞĞÕûÀí
+** Descriptions:  å°†ADCçš„é€šé“å‚æ•°è¿›è¡Œæ•´ç†
 ** input parameters:
 ** input parameters:
 ** input parameters:
 ** output parameters:
 ** Returned value:
-** ±¸×¢£ºĞèÒªÎ¬»¤³öÁ½¸öÈ«¾Ö±äÁ¿²ÎÊı£ºĞèÒª×ª»»»¯µÄÍ¨µÀ×ÜÊıchannelCount£¬¸÷¸öÍ¨µÀµÄË÷ÒıchannelNum[]£¬
+** å¤‡æ³¨ï¼šéœ€è¦ç»´æŠ¤å‡ºä¸¤ä¸ªå…¨å±€å˜é‡å‚æ•°ï¼šéœ€è¦è½¬æ¢åŒ–çš„é€šé“æ€»æ•°channelCountï¼Œå„ä¸ªé€šé“çš„ç´¢å¼•channelNum[]ï¼Œ
 *********************************************************************************************************/
 void ADC_secretary( uint8_t channel)
 {
     uint8_t i = 0,j = 0;
-    uint8_t channelMask = 0x01;     //Í¨µÀÑÚÂë
+    uint8_t channelMask = 0x01;     //é€šé“æ©ç 
     for( i=0; i<8; i++ )
     {
         channelMask << i;
@@ -121,22 +121,22 @@ void ADC_secretary( uint8_t channel)
 
 /*********************************************************************************************************
 ** Function name: adc_isr()
-** Descriptions:  ADC×ª»»Íê³ÉÖĞ¶Ïº¯Êı
+** Descriptions:  ADCè½¬æ¢å®Œæˆä¸­æ–­å‡½æ•°
 ** input parameters:
 ** input parameters:
 ** input parameters:
 ** output parameters:
 ** Returned value:
-** ±¸×¢£º
+** å¤‡æ³¨ï¼š
 *********************************************************************************************************/
 #pragma interrupt_handler adc_isr:iv_ADC
 void adc_isr(void)
 {
-    static uint8_t acdCount = 0;    //ÖĞ¶Ï¼ÆÊı
-    uint16_t ADResult;      //×ª»»Íê³ÉµÄADÖµ
-    if( 0 == invalidFlag )//Èç¹ûÖĞ¶ÏÓĞĞ§
+    static uint8_t acdCount = 0;    //ä¸­æ–­è®¡æ•°
+    uint16_t ADResult;      //è½¬æ¢å®Œæˆçš„ADå€¼
+    if( 0 == invalidFlag )//å¦‚æœä¸­æ–­æœ‰æ•ˆ
     {
-        if( hadc.stateFlag == 1)    //´ú±íÒ»´ÎĞÂµÄ×ª»»
+        if( hadc.stateFlag == 1)    //ä»£è¡¨ä¸€æ¬¡æ–°çš„è½¬æ¢
         {
             hadc.stateFlag = 0;
             acdCount = 0;
@@ -146,13 +146,13 @@ void adc_isr(void)
         hadc.newDataFlag |= BIT(currentChannel);
         hadc.channelData[currentChannel] = ADResult;
 
-        acdCount ++;        //ÖĞ¶Ï´ÎÊı++
+        acdCount ++;        //ä¸­æ–­æ¬¡æ•°++
         if( acdCount >= channelCount )
             hadc.endFlag = 1;
-        if( 1 != hadc.endFlag )     //Èç¹ûÃ»×ª»»Íê³É£¬¼ÌĞø×ª»»
+        if( 1 != hadc.endFlag )     //å¦‚æœæ²¡è½¬æ¢å®Œæˆï¼Œç»§ç»­è½¬æ¢
         {
             currentChannel = channelNum[acdCount];
-            ADMUX |= currentChannel;     //¸³ÖµAD×ª»»Í¨µÀºÅ
+            ADMUX |= currentChannel;     //èµ‹å€¼ADè½¬æ¢é€šé“å·
             ADC_StartCon();
         }
     }
@@ -166,13 +166,13 @@ void adc_isr(void)
 
 /*********************************************************************************************************
 ** Function name: AdcCompleteCallBack()
-** Descriptions:  ADC×ª»»Íê³É±¸ÓÃ»Øµ÷º¯Êı
+** Descriptions:  ADCè½¬æ¢å®Œæˆå¤‡ç”¨å›è°ƒå‡½æ•°
 ** input parameters:
 ** input parameters:
 ** input parameters:
 ** output parameters:
 ** Returned value:
-** ±¸×¢£º
+** å¤‡æ³¨ï¼š
 *********************************************************************************************************/
 void AdcCompleteCallBack( void )
 {

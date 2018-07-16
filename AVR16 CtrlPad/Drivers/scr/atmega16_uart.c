@@ -2,7 +2,7 @@
  * Revision: V1.0
  * Date: 2018-6-13
  * Author: cff
- *Describe: clkÆµÂÊÎª7.3728ÏÂÅäÖÃ
+ *Describe: clké¢‘ç‡ä¸º7.3728ä¸‹é…ç½®
  */
 
 #include "atmega16_uart.h"
@@ -11,47 +11,47 @@
 
 /*********************************************************************************************************
 ** Function name:       UARTInit
-** Descriptions:        ÅäÖÃ´®¿ÚµÄ²¨ÌØÂÊ
-** input parameters:    PortNum£º´®¿ÚºÅ¿ÉÈ¡ÖµUART0
-** input parameters:    baudrate£º_7_3728Mhz4800... ºê¶¨Òå¶¨Òå
-** input parameters:    receiveInterrupt:½ÓÊÕÖĞ¶Ï¿ªÆô
-** output parameters:   ÎŞ
-** Returned value:      ÎŞ
-** ±¸×¢£ºÉè±¸°´ÕÕ8Î»£¬ÎŞĞ£Ñé£¬1Í£Ö¹Î»
+** Descriptions:        é…ç½®ä¸²å£çš„æ³¢ç‰¹ç‡
+** input parameters:    PortNumï¼šä¸²å£å·å¯å–å€¼UART0
+** input parameters:    baudrateï¼š_7_3728Mhz4800... å®å®šä¹‰å®šä¹‰
+** input parameters:    receiveInterrupt:æ¥æ”¶ä¸­æ–­å¼€å¯
+** output parameters:   æ— 
+** Returned value:      æ— 
+** å¤‡æ³¨ï¼šè®¾å¤‡æŒ‰ç…§8ä½ï¼Œæ— æ ¡éªŒï¼Œ1åœæ­¢ä½
 *********************************************************************************************************/
 void UARTInit( uint8_t PortNum, uint16_t baudrate, uint8_t receiveInterrupt )
 {
     if( UART0 == PortNum )
     {
-        UCSRB |= BIT(TXEN);   //Ê¹ÄÜUART0·¢ËÍ¿ª¹Ø
+        UCSRB |= BIT(TXEN);   //ä½¿èƒ½UART0å‘é€å¼€å…³
         UBRRH = (uint8_t)(baudrate >> 8);
-        UBRRL = (uint8_t)(baudrate >> 0);  //ÉèÖÃ²¨ÌØÂÊ
+        UBRRL = (uint8_t)(baudrate >> 0);  //è®¾ç½®æ³¢ç‰¹ç‡
         if( ENABLE == receiveInterrupt )
         {
-            UCSRB |= BIT(RXCIE) ;//¿ªÆô½ÓÊÕÖĞ¶Ï
+            UCSRB |= BIT(RXCIE) ;//å¼€å¯æ¥æ”¶ä¸­æ–­
         }
         else if( DISABLE == receiveInterrupt )
         {
-            UCSRB &= ~( BIT(RXCIE) );//¹Ø±Õ½ÓÊÕÖĞ¶Ï
+            UCSRB &= ~( BIT(RXCIE) );//å…³é—­æ¥æ”¶ä¸­æ–­
         }
     }
 }
 
 /*********************************************************************************************************
 ** Function name:       UARTSendByte
-** Descriptions:        Í¨¹ıÏàÓ¦´®¿Ú·¢ËÍÒ»¸ö×Ö½Ú£¬²éÑ¯·½Ê½ÏÂÍê³É·¢ËÍ¡£
-** input parameters:    PortNum£º´®¿ÚºÅ¿ÉÈ¡ÖµUART0
-** input parameters:    Byte£ºÒª·¢ËÍµÄ×Ö½Ú
-** Returned value:      ·¢ËÍ³É¹¦Îª0,·¢ËÍ´íÎóÎª·Ç0
-** ±¸×¢£º1+8+1+ÎŞĞ£Ñé¸ñÊ½
+** Descriptions:        é€šè¿‡ç›¸åº”ä¸²å£å‘é€ä¸€ä¸ªå­—èŠ‚ï¼ŒæŸ¥è¯¢æ–¹å¼ä¸‹å®Œæˆå‘é€ã€‚
+** input parameters:    PortNumï¼šä¸²å£å·å¯å–å€¼UART0
+** input parameters:    Byteï¼šè¦å‘é€çš„å­—èŠ‚
+** Returned value:      å‘é€æˆåŠŸä¸º0,å‘é€é”™è¯¯ä¸ºé0
+** å¤‡æ³¨ï¼š1+8+1+æ— æ ¡éªŒæ ¼å¼
 *********************************************************************************************************/
 uint8_t UARTSendByte( uint8_t PortNum, uint8_t Byte )
 {
     if( UART0 == PortNum )
     {
         UDR = Byte;
-        while( (UCSRA & BIT(TXC)) == 0  );    //µÈ´ı·¢ËÍÍê³É
-        UCSRA |= BIT(TXC);    //Çå³ı±êÖ¾Î»
+        while( (UCSRA & BIT(TXC)) == 0  );    //ç­‰å¾…å‘é€å®Œæˆ
+        UCSRA |= BIT(TXC);    //æ¸…é™¤æ ‡å¿—ä½
     }
     return 0;
 }
@@ -61,7 +61,7 @@ uint8_t UARTSendByte( uint8_t PortNum, uint8_t Byte )
 
 
 
-#pragma interrupt_handler uart0_rx_isr: iv_USART0_RX        //UART0½ÓÊÕÖĞ¶Ïº¯Êı
+#pragma interrupt_handler uart0_rx_isr: iv_USART0_RX        //UART0æ¥æ”¶ä¸­æ–­å‡½æ•°
 void uart0_rx_isr(void)
 {
     _NOP();

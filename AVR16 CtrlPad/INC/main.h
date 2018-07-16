@@ -8,6 +8,47 @@
 #ifndef __main_h
 #define __main_h
 
+
+
+
+typedef struct PanelClassDef
+{
+
+/* button 为二值状态变量 ON OFF  */
+	uint8_t key1State;
+	uint8_t key2State;
+	uint8_t key3tate;
+	uint8_t key4State;
+	uint8_t key5State;
+	uint8_t key6State;
+	uint8_t key7State;
+	uint8_t key8State;	
+
+/* button 为三值状态变量 UP DOWN MIDDLE  */
+	uint8_t button1State;
+	uint8_t button2State;
+	uint8_t button3State;
+	uint8_t button4State;
+	uint8_t button5State;
+	uint8_t button6State;
+	uint8_t button7State;
+	uint8_t button8State;
+
+/* joystick 为多值变量，一般为AD值 */
+	uint16_t  joystick1;
+	uint16_t  joystick2;
+	uint16_t  joystick3;
+	uint16_t  joystick4;
+	uint16_t  joystick5;
+	uint16_t  joystick6;
+	uint16_t  joystick7;
+	uint16_t  joystick8;
+
+}PanelClass;
+
+
+
+
 typedef struct MotorClassDef
 {
 	uint8_t ID;		//电机标号
@@ -38,17 +79,17 @@ typedef struct GeneralClassDef
 } GeneralClass;			//描述透传行为
 
 
-typedef struct CtrlPadDef
+typedef struct CtrlPadClassDef
 {
 	uint8_t OptMod;				//操作模式
-	MotorClass SuvSys_ARM1;		//大臂
-	MotorClass SuvSys_ARM2;		//二臂
-	MotorClass SuvSys_ARM3;		//三臂
-	MotorClass SuvSys_ARM4;		//四臂
-	MotorClass SuvSys_ARM5;		//
-	StandardClass SuvSys_yuntai;//
-	GeneralClass SuvSys_ transfer;//
-}
+	MotorClass SubSys_ARM1;		//大臂
+	MotorClass SubSys_ARM2;		//二臂
+	MotorClass SubSys_ARM3;		//三臂
+	MotorClass SubSys_ARM4;		//四臂
+	MotorClass SubSys_ARM5;		//
+	StandardClass SubSys_yuntai;//
+	GeneralClass SubSys_transfer;//
+}CtrlPadClass;
 
 
 

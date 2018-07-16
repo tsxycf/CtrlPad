@@ -15,13 +15,13 @@
 
 /*********************************************************************************************************
 ** Function name:   GPIO_SetDir
-** Descriptions:    ÉèÖÃ¶Ë¿Ú·½Ïò
-** input parameters: I/O¿Ú£¨PORT_A..F£©
-** input parameters: Î»ºÅ£¨0.1.2.3.4.5.6.7£©
-** input parameters: ·½Ïò£¨IN OUT£©
+** Descriptions:    è®¾ç½®ç«¯å£æ–¹å‘
+** input parameters: I/Oå£ï¼ˆPORT_A..Fï¼‰
+** input parameters: ä½å·ï¼ˆ0.1.2.3.4.5.6.7ï¼‰
+** input parameters: æ–¹å‘ï¼ˆIN OUTï¼‰
 ** output parameters:
 ** Returned value:
-** ±¸×¢£º
+** å¤‡æ³¨ï¼š
 ********************************************************************************************************/
 void GPIO_SetDir( uint8_t portNum, uint8_t bitValue, uint8_t dir )
 {
@@ -79,13 +79,13 @@ void GPIO_SetDir( uint8_t portNum, uint8_t bitValue, uint8_t dir )
 
 /*********************************************************************************************************
 ** Function name:   GPIO_Set
-** Descriptions:    Òı½ÅÖÃÎ»
-** input parameters: I/O¿Ú£¨PORT_A..F£©
-** input parameters: Î»ºÅ£¨0.1.2.3.4.5.6.7£©
-** input parameters: Î»Öµ( PORT_SET,PORT_SET )
+** Descriptions:    å¼•è„šç½®ä½
+** input parameters: I/Oå£ï¼ˆPORT_A..Fï¼‰
+** input parameters: ä½å·ï¼ˆ0.1.2.3.4.5.6.7ï¼‰
+** input parameters: ä½å€¼( PORT_SET,PORT_SET )
 ** output parameters:
 ** Returned value:
-** ±¸×¢£º
+** å¤‡æ³¨ï¼š
 **********************************************************************************************************/
 void GPIO_Set(uint8_t portNum, uint8_t bitValue, uint8_t value)
 {
@@ -141,12 +141,12 @@ void GPIO_Set(uint8_t portNum, uint8_t bitValue, uint8_t value)
 
 /*********************************************************************************************************
 ** Function name:   GPIO_Get
-** Descriptions:    »ñµÃÒı½ÅÖµ
-** input parameters: I/O¿Ú£¨PORT_A..F£©
-** input parameters: Î»ºÅ£¨0.1.2.3.4.5.6.7£©
+** Descriptions:    è·å¾—å¼•è„šå€¼
+** input parameters: I/Oå£ï¼ˆPORT_A..Fï¼‰
+** input parameters: ä½å·ï¼ˆ0.1.2.3.4.5.6.7ï¼‰
 ** output parameters:
 ** Returned value:
-** ±¸×¢£º
+** å¤‡æ³¨ï¼š
 *********************************************************************************************************/
 uint8_t GPIO_Get(uint8_t portNum, uint8_t bitValue )
 {
